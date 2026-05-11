@@ -1,7 +1,7 @@
 export const CATEGORIES = [
-    { id: 'nature', title: 'Природа' },
-    { id: 'animals', title: 'Тварини' },
-    { id: 'social', title: 'Місто' }
+    { id: 'nature', title: 'android' },
+    { id: 'animals', title: 'ios' },
+    { id: 'social', title: 'watch' }
 ];
 
 export const ALL_CATEGORIES = [

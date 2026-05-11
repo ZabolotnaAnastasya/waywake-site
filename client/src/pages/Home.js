@@ -76,7 +76,6 @@ function Home() {
                         background: p.bg,
                         border: `1px solid ${p.border}`,
                         borderRadius: '22px',
-                        padding: '36px 30px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '16px',
