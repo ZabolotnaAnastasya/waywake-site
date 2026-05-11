@@ -47,7 +47,7 @@ const platforms = [
 
 function Home() {
     return (
-        <div style={{ padding: '40px 5% 80px', maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ padding: '40px 5% 80px', width: '100%', boxSizing: 'border-box' }}>
 
             {/* Hero */}
             <div className="glass-box" style={{ marginBottom: '50px', padding: '60px 40px' }}>

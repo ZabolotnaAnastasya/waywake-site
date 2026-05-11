@@ -28,7 +28,7 @@ function MyInitiatives({ initiatives, joinedIds, onLeave, onRate, user, onLogout
     const myProjects = initiatives.filter(item => joinedIds.includes(item.id));
 
     return (
-        <div style={{ padding: '40px 5% 80px', maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ padding: '40px 5% 80px', width: '100%', boxSizing: 'border-box' }}>
 
             {/* Profile header */}
             <div className="glass-box" style={{
