@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const API_URL = process.env.REACT_APP_API_URL || '/api';
+
 function StarRating({ rating, onRate, userRated, disabled }) {
     const [hovered, setHovered] = useState(0);
     return (
@@ -38,7 +40,6 @@ function InitiativeCard({ item, onJoin, isJoined, isCabinet, user, onRate }) {
         if (!user || loadingRate) return;
         setLoadingRate(true);
 
-        // Токен зберігається в localStorage після логіну через наш бекенд
         const token = localStorage.getItem('token');
         if (!token) {
             alert("Увійдіть в акаунт щоб оцінювати.");
@@ -47,7 +48,7 @@ function InitiativeCard({ item, onJoin, isJoined, isCabinet, user, onRate }) {
         }
 
         try {
-            const res  = await fetch(`http://localhost:5001/api/initiatives/${item.id}/ratings`, {
+            const res = await fetch(`${API_URL}/initiatives/${item.id}/ratings`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,12 +88,7 @@ function InitiativeCard({ item, onJoin, isJoined, isCabinet, user, onRate }) {
 
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '10px', marginTop: '10px' }}>
                 <div style={{ fontSize: '0.78rem', color: '#aaa', marginBottom: '2px' }}>
-                    {userRated
-                        ? 'Вашу оцінку враховано ✓'
-                        : user
-                            ? 'Оцініть ініціативу:'
-                            : 'Рейтинг'
-                    }
+                    {userRated ? 'Вашу оцінку враховано ✓' : user ? 'Оцініть ініціативу:' : 'Рейтинг'}
                     {localCount > 0 &&
                         <span style={{ marginLeft: '8px', opacity: 0.6 }}>
                             ({localCount} {localCount === 1 ? 'відгук' : localCount < 5 ? 'відгуки' : 'відгуків'})

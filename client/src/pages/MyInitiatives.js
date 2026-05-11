@@ -1,86 +1,172 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import InitiativeCard from '../components/InitiativeCard';
-import { ALL_CATEGORIES } from '../constants';
+import React from 'react';
 
-function MyInitiatives({ initiatives, joinedIds, onLeave, onRate, user, onLogout, authLoading }) {
-    const [filterCategory, setFilterCategory] = useState('all');
+const platforms = [
+    {
+        id: 'android',
+        label: 'Android',
+        icon: '🤖',
+        bg: 'linear-gradient(135deg, rgba(61,220,132,0.15), rgba(0,0,0,0.3))',
+        border: 'rgba(61,220,132,0.3)',
+        accent: '#3ddc84',
+        badge: 'Google Play',
+        badgeBg: 'rgba(61,220,132,0.2)',
+        desc: 'Для смартфонів на Android 8.0 і вище',
+        size: '24 МБ',
+        version: 'v2.1.0',
+        link: '#',
+    },
+    {
+        id: 'ios',
+        label: 'iOS',
+        icon: '',
+        bg: 'linear-gradient(135deg, rgba(100,180,255,0.15), rgba(0,0,0,0.3))',
+        border: 'rgba(100,180,255,0.3)',
+        accent: '#64b4ff',
+        badge: 'App Store',
+        badgeBg: 'rgba(100,180,255,0.2)',
+        desc: 'Для iPhone та iPad з iOS 14+',
+        size: '31 МБ',
+        version: 'v2.1.0',
+        link: '#',
+    },
+    {
+        id: 'watch',
+        label: 'WearOS / Apple Watch',
+        icon: '⌚',
+        bg: 'linear-gradient(135deg, rgba(200,160,255,0.15), rgba(0,0,0,0.3))',
+        border: 'rgba(200,160,255,0.3)',
+        accent: '#c8a0ff',
+        badge: 'Watch App',
+        badgeBg: 'rgba(200,160,255,0.2)',
+        desc: 'Повна версія для розумного годинника',
+        size: '8 МБ',
+        version: 'v1.4.2',
+        link: '#',
+    },
+];
 
-    if (authLoading) {
-        return <div style={{ textAlign: 'center', padding: '50px', color: 'white' }}>Завантаження...</div>;
-    }
-
-    if (!user) {
-        return (
-            <main className="my-initiatives-page" style={{ width: '90%', margin: '0 auto', textAlign: 'center' }}>
-                <div className="glass-box" style={{ padding: '60px 20px', marginTop: '50px' }}>
-                    <h2 style={{ textTransform: 'lowercase' }}>привіт, волонтере!</h2>
-                    <p style={{ opacity: 0.8, marginBottom: '30px' }}>
-                        щоб переглянути свої ініціативи, будь ласка, увійдіть або зареєструйтеся
-                    </p>
-                    <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
-                        <Link to="/auth" className="join-btn" style={{ textDecoration: 'none', width: '180px', margin: '0' }}>Увійти</Link>
-                        <Link to="/register" className="join-btn" style={{ textDecoration: 'none', width: '180px', margin: '0', background: 'rgba(255,255,255,0.1)' }}>Реєстрація</Link>
-                    </div>
-                </div>
-            </main>
-        );
-    }
-
-    const myProjects = initiatives.filter(item =>
-        joinedIds.includes(item.id) &&
-        (filterCategory === 'all' || item.category === filterCategory)
-    );
-
+function DownloadPage() {
     return (
-        <main className="my-initiatives-page" style={{ width: '90%', margin: '0 auto' }}>
-            <section className="profile-section" style={{ width: '100%', marginBottom: '2%' }}>
-                <div className="glass-box" style={{ padding: '3%', marginBottom: '2%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ textAlign: 'left' }}>
-                        <h1 style={{ textTransform: 'lowercase', margin: '0', fontSize: '2.2rem' }}>користувач</h1>
-                        <p style={{ fontSize: '1.8rem', margin: '0', fontWeight: 'bold' }}>{user.email}</p>
-                    </div>
-                    <button onClick={onLogout} className="join-btn" style={{ width: 'auto', padding: '10px 30px', margin: '0' }}>Вийти</button>
-                </div>
-            </section>
+        <div style={{ padding: '40px 5% 80px', maxWidth: '1100px', margin: '0 auto' }}>
 
-            <section id="my_to_do" className="grid-section">
-                <div className="section-intro glass-box">
-                    <h2>Заплановано</h2>
-                    <div className="filter-container">
-                        {ALL_CATEGORIES.map(cat => (
-                            <button
-                                key={cat.id}
-                                className={`filter-btn ${filterCategory === cat.id ? 'active' : ''}`}
-                                onClick={() => setFilterCategory(cat.id)}
-                            >
-                                {cat.title}
-                            </button>
-                        ))}
+            {/* Hero */}
+            <div className="glass-box" style={{ marginBottom: '50px', padding: '60px 40px' }}>
+                <div style={{ fontSize: '3.5rem', marginBottom: '16px' }}>WayWake</div>
+                <h1 style={{
+                    fontSize: 'clamp(1.6rem, 4vw, 2.6rem)',
+                    margin: '0 0 16px',
+                    letterSpacing: '3px',
+                    textTransform: 'uppercase'
+                }}>
+                    Завантажити додаток
+                </h1>
+                <p style={{ color: '#ccc', fontSize: '1.05rem', maxWidth: '540px', margin: '0 auto', lineHeight: 1.7 }}>
+                    Встановіть WayWake на свій пристрій та прокидайтеся разом з природою щодня
+                </p>
+            </div>
+
+            {/* Cards */}
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+                gap: '28px',
+            }}>
+                {platforms.map(p => (
+                    <div key={p.id} style={{
+                        background: p.bg,
+                        border: `1px solid ${p.border}`,
+                        borderRadius: '22px',
+                        padding: '36px 30px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '16px',
+                        transition: 'transform 0.25s, box-shadow 0.25s',
+                        cursor: 'default',
+                    }}
+                         onMouseEnter={e => {
+                             e.currentTarget.style.transform = 'translateY(-6px)';
+                             e.currentTarget.style.boxShadow = `0 16px 40px ${p.border}`;
+                         }}
+                         onMouseLeave={e => {
+                             e.currentTarget.style.transform = 'translateY(0)';
+                             e.currentTarget.style.boxShadow = 'none';
+                         }}
+                    >
+                        {/* Icon + badge */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                            <span style={{ fontSize: '2.8rem', lineHeight: 1 }}>{p.icon}</span>
+                            <span style={{
+                                background: p.badgeBg,
+                                border: `1px solid ${p.border}`,
+                                color: p.accent,
+                                borderRadius: '8px',
+                                padding: '4px 12px',
+                                fontSize: '0.75rem',
+                                fontWeight: 'bold',
+                                letterSpacing: '1px',
+                            }}>
+                                {p.badge}
+                            </span>
+                        </div>
+
+                        {/* Title + desc */}
+                        <div>
+                            <h2 style={{
+                                margin: '0 0 8px',
+                                fontSize: '1.35rem',
+                                color: p.accent,
+                                letterSpacing: '1px',
+                                textTransform: 'uppercase',
+                            }}>
+                                {p.label}
+                            </h2>
+                            <p style={{ margin: 0, color: '#bbb', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                                {p.desc}
+                            </p>
+                        </div>
+
+                        {/* Meta */}
+                        <div style={{
+                            display: 'flex',
+                            gap: '16px',
+                            fontSize: '0.8rem',
+                            color: '#888',
+                            borderTop: `1px solid ${p.border}`,
+                            paddingTop: '14px',
+                        }}>
+                            <span>📦 {p.size}</span>
+                            <span>🔖 {p.version}</span>
+                        </div>
+
+                        {/* Button */}
+                        <a href={p.link} style={{
+                            display: 'block',
+                            textAlign: 'center',
+                            padding: '14px',
+                            borderRadius: '12px',
+                            background: p.accent,
+                            color: '#000',
+                            fontWeight: 'bold',
+                            textDecoration: 'none',
+                            fontSize: '0.95rem',
+                            letterSpacing: '1px',
+                            transition: 'filter 0.2s',
+                        }}
+                           onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.15)'}
+                           onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
+                        >
+                            ↓ Завантажити
+                        </a>
                     </div>
-                </div>
-                <div className="project-list" style={{ marginTop: '3%' }}>
-                    {myProjects.length > 0 ? (
-                        myProjects.map(item => (
-                            <InitiativeCard
-                                key={item.id}
-                                item={item}
-                                onJoin={onLeave}
-                                onRate={onRate}
-                                isJoined={true}
-                                isCabinet={true}
-                                user={user}
-                            />
-                        ))
-                    ) : (
-                        <p style={{ textAlign: 'center', opacity: 0.5, padding: '40px', width: '100%', color: 'white' }}>
-                            У вас ще немає запланованих ініціатив.
-                        </p>
-                    )}
-                </div>
-            </section>
-        </main>
+                ))}
+            </div>
+
+            {/* Footer note */}
+            <p style={{ textAlign: 'center', color: '#555', marginTop: '50px', fontSize: '0.85rem' }}>
+                Усі версії безкоштовні. Жодних прихованих платежів.
+            </p>
+        </div>
     );
 }
 
-export default MyInitiatives;
+export default DownloadPage;
