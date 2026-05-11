@@ -47,7 +47,7 @@ const platforms = [
 
 function Home() {
     return (
-        <div style={{ padding: '40px 5% 80px', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ padding: '40px 5% 80px', maxWidth: '1100px', margin: '0 auto' }}>
 
             {/* Hero */}
             <div className="glass-box" style={{ marginBottom: '50px', padding: '60px 40px' }}>
@@ -76,6 +76,7 @@ function Home() {
                         background: p.bg,
                         border: `1px solid ${p.border}`,
                         borderRadius: '22px',
+                        padding: '36px 30px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '16px',
@@ -150,10 +151,6 @@ function Home() {
                     </div>
                 ))}
             </div>
-
-            <p style={{ textAlign: 'center', color: '#555', marginTop: '50px', fontSize: '0.85rem' }}>
-                Усі версії безкоштовні. Жодних прихованих платежів.
-            </p>
         </div>
     );
 }
