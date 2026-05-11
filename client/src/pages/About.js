@@ -6,7 +6,7 @@ function About() {
             <div className="glass-box" style={{ margin: '100px auto', maxWidth: '850px' }}>
                 <h2>Хто ми?</h2>
                 <img
-                    src={process.env.PUBLIC_URL + '/logo.png'}
+                    src={process.env.PUBLIC_URL + '/logo.svg'}
                     alt="Логотип"
                     style={{ height: '150px', display: 'block', margin: '0 auto 20px' }}
                     onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=Logo+Missing'; }}

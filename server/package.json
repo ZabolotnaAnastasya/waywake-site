@@ -1,14 +1,19 @@
 {
-  "name": "lab5",
+  "name": "waywake-site",
   "version": "1.0.0",
-  "description": "Backend for volunteer initiatives platform - Lab 5",
+  "description": "Backend for WayWake sleep analysis project",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "postinstall": "prisma generate"
   },
-  "keywords": [],
+  "keywords": [
+    "waywake",
+    "sleep-analysis",
+    "prisma"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
