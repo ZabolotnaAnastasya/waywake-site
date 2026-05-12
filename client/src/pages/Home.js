@@ -13,7 +13,7 @@ const platforms = [
         desc: 'Для смартфонів на Android 8.0 і вище',
         size: '24 МБ',
         version: 'v2.1.0',
-        link: '#',
+        link: 'https://github.com/LastCarrige/waywake',
     },
     {
         id: 'ios',
@@ -27,7 +27,7 @@ const platforms = [
         desc: 'Для iPhone та iPad з iOS 14+',
         size: '31 МБ',
         version: 'v2.1.0',
-        link: '#',
+        link: 'https://github.com/LastCarrige/waywake',
     },
     {
         id: 'watch',
