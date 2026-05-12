@@ -31,8 +31,10 @@ function App() {
         };
 
         const handleLoaded = () => {
-            video.pause();
-            video.currentTime = 0;
+            video.play().then(() => {
+                video.pause();
+                video.currentTime = 0;
+            });
         };
 
         video.addEventListener('loadedmetadata', handleLoaded);
