@@ -75,7 +75,7 @@ function About() {
                                 playsInline
                                 style={{
                                     width: '100%',
-                                    borderRadius: '14px',
+                                    borderRadius: '3%',
                                     border: '1px solid rgba(255,255,255,0.15)',
                                     display: 'block',
                                 }}

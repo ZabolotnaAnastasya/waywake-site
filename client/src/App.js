@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -16,6 +16,33 @@ function App() {
     const [initiatives, setInitiatives] = useState([]);
     const [joinedIds, setJoinedIds] = useState([]);
     const [loading, setLoading] = useState(true);
+    const videoRef = useRef(null);
+
+    // Синхронізація відео зі скролом
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        const handleScroll = () => {
+            if (!video.duration) return;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+            video.currentTime = progress * video.duration;
+        };
+
+        const handleLoaded = () => {
+            video.pause();
+            video.currentTime = 0;
+        };
+
+        video.addEventListener('loadedmetadata', handleLoaded);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            video.removeEventListener('loadedmetadata', handleLoaded);
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     // Перевірка токена
     useEffect(() => {
@@ -61,7 +88,7 @@ function App() {
 
     // Логін
     const handleLogin = (u) => {
-        if (!u.token) return; // Захист від запису undefined
+        if (!u.token) return;
         localStorage.setItem('token', u.token);
         localStorage.setItem('userEmail', u.email);
         setUser({ email: u.email });
@@ -74,7 +101,6 @@ function App() {
         setUser(null);
         setJoinedIds([]);
     };
-
 
     // Долучитися / вийти
     const handleJoin = async (initiativeId) => {
@@ -94,7 +120,6 @@ function App() {
                 setJoinedIds(prev =>
                     isJoined ? prev.filter(id => id !== initiativeId) : [...prev, initiativeId]
                 );
-                // Оновлюємо лічильник current
                 setInitiatives(prev => prev.map(item =>
                     item.id === initiativeId ? { ...item, current: data.current } : item
                 ));
@@ -135,7 +160,7 @@ function App() {
         }
     };
 
-    // нова ініціатива
+    // Нова ініціатива
     const handleAddInitiative = async (newInitData) => {
         const token = localStorage.getItem('token');
         if (!token || token === 'undefined') {
@@ -167,6 +192,18 @@ function App() {
 
     return (
         <Router>
+            {/* Відео-фон синхронізований зі скролом */}
+            <div className="video-bg">
+                <video
+                    ref={videoRef}
+                    muted
+                    playsInline
+                    preload="auto"
+                >
+                    <source src={`${process.env.PUBLIC_URL}/backgr.mp4`} type="video/mp4" />
+                </video>
+            </div>
+
             <div className="app-container">
                 <Navbar user={user} onLogout={handleLogout} />
                 <main className="content-area">
