@@ -41,13 +41,13 @@ const platforms = [
         desc: 'Повна версія для розумного годинника',
         size: '8 МБ',
         version: 'v1.4.2',
-        link: '#',
+        link: 'https://github.com/LastCarrige/Smart-Alarm-work/tree/main/watch_app',
     },
 ];
 
 function Home() {
     return (
-        <div style={{ padding: '40px 5% 80px', maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ padding: '40px 5% 80px', width: '100%', boxSizing: 'border-box' }}>
 
             {/* Hero */}
             <div className="glass-box" style={{ marginBottom: '50px', padding: '60px 40px' }}>
@@ -70,6 +70,8 @@ function Home() {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
                 gap: '28px',
+                maxWidth: '1100px',
+                margin: '0 auto',
             }}>
                 {platforms.map(p => (
                     <div key={p.id} style={{
@@ -130,27 +132,98 @@ function Home() {
                             <span>🔖 {p.version}</span>
                         </div>
 
-                        <a href={p.link} style={{
-                            display: 'block',
-                            textAlign: 'center',
-                            padding: '14px',
-                            borderRadius: '12px',
-                            background: p.accent,
-                            color: '#000',
-                            fontWeight: 'bold',
-                            textDecoration: 'none',
-                            fontSize: '0.95rem',
-                            letterSpacing: '1px',
-                            transition: 'filter 0.2s',
-                        }}
-                           onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.15)'}
-                           onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
+                        <a
+                            href={p.link}
+                            target={p.link !== '#' ? '_blank' : undefined}
+                            rel="noreferrer"
+                            style={{
+                                display: 'block',
+                                textAlign: 'center',
+                                padding: '14px',
+                                borderRadius: '12px',
+                                background: p.accent,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                textDecoration: 'none',
+                                fontSize: '0.95rem',
+                                letterSpacing: '1px',
+                                transition: 'filter 0.2s',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.15)'}
+                            onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
                         >
                             ↓ Завантажити
                         </a>
                     </div>
                 ))}
             </div>
+
+            {/* Watch preview section */}
+            <div style={{
+                maxWidth: '1100px',
+                margin: '60px auto 0',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '50px',
+                flexWrap: 'wrap',
+            }}>
+                {/* Фото годинника */}
+                <div style={{ flex: '0 0 auto', textAlign: 'center' }}>
+                    <img
+                        src={process.env.PUBLIC_URL + '/watch.png'}
+                        alt="WayWake на годиннику"
+                        style={{
+                            height: '280px',
+                            borderRadius: '24px',
+                            border: '1px solid rgba(200,160,255,0.3)',
+                            boxShadow: '0 0 40px rgba(200,160,255,0.2)',
+                            display: 'block',
+                        }}
+                        onError={e => { e.target.style.display = 'none'; }}
+                    />
+                </div>
+
+                {/* Текст */}
+                <div className="glass-box" style={{
+                    flex: '1 1 300px',
+                    margin: 0,
+                    maxWidth: 'none',
+                    textAlign: 'left',
+                    borderColor: 'rgba(200,160,255,0.3)',
+                }}>
+                    <h2 style={{ color: '#c8a0ff', marginTop: 0 }}>⌚ WayWake на вашому зап'ястку</h2>
+                    <p style={{ color: '#ccc', lineHeight: 1.7 }}>
+                        Повна версія додатку для WearOS та Apple Watch —
+                        будильник, маршрути та природні звуки прямо на годиннику.
+                        Без телефону, без зайвих дотиків.
+                    </p>
+                    <a
+                        href="https://github.com/LastCarrige/Smart-Alarm-work/tree/main/watch_app"
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                            display: 'inline-block',
+                            marginTop: '16px',
+                            padding: '12px 28px',
+                            borderRadius: '12px',
+                            background: '#c8a0ff',
+                            color: '#000',
+                            fontWeight: 'bold',
+                            textDecoration: 'none',
+                            fontSize: '0.95rem',
+                            letterSpacing: '1px',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.15)'}
+                        onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
+                    >
+                        ↓ Завантажити для годинника
+                    </a>
+                </div>
+            </div>
+
+            <p style={{ textAlign: 'center', color: '#555', marginTop: '50px', fontSize: '0.85rem' }}>
+                Усі версії безкоштовні. Жодних прихованих платежів.
+            </p>
         </div>
     );
 }
