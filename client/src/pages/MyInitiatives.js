@@ -112,6 +112,68 @@ function MyInitiatives({ initiatives, joinedIds, onLeave, onRate, user, onLogout
                 </div>
             </div>
 
+            {/* Watch preview section */}
+            <div style={{
+                maxWidth: '1100px',
+                margin: '60px auto 0',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '50px',
+                flexWrap: 'wrap',
+            }}>
+                {/* Фото годинника */}
+                <div style={{ flex: '0 0 auto', textAlign: 'center' }}>
+                    <img
+                        src={process.env.PUBLIC_URL + '/watch.png'}
+                        alt="WayWake на годиннику"
+                        style={{
+                            height: '280px',
+                            borderRadius: '24px',
+                            border: '1px solid rgba(200,160,255,0.3)',
+                            boxShadow: '0 0 40px rgba(200,160,255,0.2)',
+                            display: 'block',
+                        }}
+                        onError={e => { e.target.style.display = 'none'; }}
+                    />
+                </div>
+
+                {/* Текст */}
+                <div className="glass-box" style={{
+                    flex: '1 1 300px',
+                    margin: 0,
+                    maxWidth: 'none',
+                    textAlign: 'left',
+                    borderColor: 'rgba(200,160,255,0.3)',
+                }}>
+                    <h2 style={{ color: '#c8a0ff', marginTop: 0 }}>⌚ WayWake на вашому зап'ястку</h2>
+                    <p style={{ color: '#ccc', lineHeight: 1.7 }}>
+                        Повна версія додатку для WearOS та Apple Watch —
+                        будильник, маршрути та природні звуки прямо на годиннику.
+                        Без телефону, без зайвих дотиків.
+                    </p>
+                    <a
+                        href="https://github.com/LastCarrige/Smart-Alarm-work/tree/main/watch_app"
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                            display: 'inline-block',
+                            marginTop: '16px',
+                            padding: '12px 28px',
+                            borderRadius: '12px',
+                            background: '#c8a0ff',
+                            color: '#000',
+                            fontWeight: 'bold',
+                            textDecoration: 'none',
+                            fontSize: '0.95rem',
+                            letterSpacing: '1px',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.15)'}
+                        onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
+                    >
+                        ↓ Завантажити для годинника
+                    </a>
+                </div>
+            </div>
             {/* Joined initiatives */}
             {myProjects.length > 0 && (
                 <div className="project-list" style={{ marginTop: '40px' }}>
