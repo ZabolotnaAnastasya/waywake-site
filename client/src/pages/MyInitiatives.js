@@ -48,27 +48,73 @@ function MyInitiatives({ initiatives, joinedIds, onLeave, onRate, user, onLogout
                     </h2>
                 </div>
                 <button onClick={onLogout} className="join-btn" style={{
-                    width: 'auto',
-                    padding: '10px 28px',
-                    margin: 0,
+                    width: 'auto', padding: '10px 28px', margin: 0,
                     background: 'rgba(255,80,80,0.3)',
                 }}>
                     Вийти
                 </button>
             </div>
 
-            {/* Joined initiatives */}
+            {/* Рекламна секція */}
             <div className="glass-box" style={{ marginBottom: '30px' }}>
-                <h2>Мої ініціативи</h2>
-                <p style={{ color: '#aaa', margin: 0 }}>
-                    {myProjects.length > 0
-                        ? `Ви долучились до ${myProjects.length} ініціатив`
-                        : 'Ви ще не долучились до жодної ініціативи'}
-                </p>
+                <h2>оскільки весь проект є безкоштовним для користувачів - трішки реклами</h2>
             </div>
 
+            <div className="glass-box" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '40px',
+                textAlign: 'left',
+                flexWrap: 'wrap',
+                borderColor: 'rgba(200,160,255,0.3)',
+                maxWidth: '900px',
+            }}>
+                {/* Фото реклами */}
+                <img
+                    src={process.env.PUBLIC_URL + '/recruitment.png'}
+                    alt="Реклама"
+                    style={{
+                        width: '260px',
+                        height: '180px',
+                        objectFit: 'cover',
+                        borderRadius: '16px',
+                        border: '1px solid rgba(200,160,255,0.3)',
+                        flexShrink: 0,
+                    }}
+                    onError={e => { e.target.style.display = 'none'; }}
+                />
+
+                {/* Текст */}
+                <div style={{ flex: '1 1 200px' }}>
+                    <h2 style={{ color: '#c8a0ff', marginTop: 0 }}>Реклама на WayWake</h2>
+                    <p style={{ color: '#ccc', lineHeight: 1.7, margin: '0 0 16px' }}>
+                        Якщо ви хочете розмістити свою рекламу, звʼяжіться з нами. Контакти в футері.
+                    </p>
+                    <a
+                        href="https://github.com/LastCarrige/Smart-Alarm-work/tree/main/watch_app"
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                            display: 'inline-block',
+                            padding: '12px 28px',
+                            borderRadius: '12px',
+                            background: '#c8a0ff',
+                            color: '#000',
+                            fontWeight: 'bold',
+                            textDecoration: 'none',
+                            fontSize: '0.95rem',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.15)'}
+                        onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
+                    >
+                        ↓ Завантажити для годинника
+                    </a>
+                </div>
+            </div>
+
+            {/* Joined initiatives */}
             {myProjects.length > 0 && (
-                <div className="project-list">
+                <div className="project-list" style={{ marginTop: '40px' }}>
                     {myProjects.map(item => (
                         <InitiativeCard
                             key={item.id}
