@@ -17,6 +17,7 @@ function About() {
                     flexWrap: 'wrap',
                 }}>
 
+
                     {/* Лівий блок — текст */}
                     <div className="glass-box" style={{
                         flex: '1 1 340px',
